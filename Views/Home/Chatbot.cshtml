@@ -1,0 +1,193 @@
+@{
+    ViewData["Title"] = "Chatbot";
+}
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-fluid img-traducible" 
+                src="@Url.Content("~/img/dialogos/lado_a.png")" 
+                data-es="@Url.Content("~/img/dialogos/lado_a.png")" 
+                data-qu="@Url.Content("~/img/dialogos/lado_a_qu.png")"
+                style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
+            </div>
+            <div class="col-md-6 chat-container">
+                <div id="chatbox">
+                    <div id="messages"></div>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="user-input" class="form-control"
+                    placeholder="Escribe un mensaje..."
+                    data-es="Escribe un mensaje..."
+                    data-qu="Huk willakuyta qillqay..." />
+                    <button id="send-btn"
+                    data-es="Enviar" data-qu="Apachiy"
+                    >Enviar</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <img class="img-fluid img-traducible" 
+                src="@Url.Content("~/img/dialogos/lado_b.png")" 
+                data-es="@Url.Content("~/img/dialogos/lado_b.png")" 
+                data-qu="@Url.Content("~/img/dialogos/lado_b_qu.png")"
+                style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
+            </div>
+        </div>
+    </div><br><br>
+
+    <!-- Importamos marked.js para convertir Markdown a HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.0.0/marked.min.js"></script>
+
+    <script>
+        const userId = crypto.randomUUID();  // ID de sesión único
+
+        // Función para mostrar un mensaje en el chat
+        function appendMessage(content, isUser = false) {
+            const chatbox = document.getElementById("chatbox");
+            const messagesDiv = document.getElementById("messages");
+
+            const message = document.createElement("div");
+            message.classList.add("message", isUser ? "user-message" : "bot-message");
+            message.innerHTML = marked.parse(content);
+            messagesDiv.appendChild(message);
+
+            // Scroll solo dentro del chatbox
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Enviar mensaje del usuario al backend
+        function sendMessage() {
+            const input = document.getElementById("user-input");
+            const userInput = input.value.trim();
+            if (!userInput) return;
+
+            appendMessage(userInput, true); // Mensaje del usuario
+            input.value = "";
+
+            fetch("https://telenanuwebservice-llm-ccb5cwgxbgf2a9hr.eastus2-01.azurewebsites.net/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    question: userInput,
+                    user_id: userId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                appendMessage(data.answer || data.response || "Error en la respuesta");
+            })
+            .catch(error => console.error("Error en el chatbot:", error));
+        }
+
+        // Evento para botón y Enter
+        document.getElementById("send-btn").addEventListener("click", sendMessage);
+        document.getElementById("user-input").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        // Enviar petición al backend al cargar la página para iniciar el cuestionario
+        window.addEventListener("load", () => {
+            fetch("https://telenanuwebservice-llm-ccb5cwgxbgf2a9hr.eastus2-01.azurewebsites.net/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    question: "start", // Mensaje vacío solo para iniciar sesión
+                    user_id: userId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.answer) {
+                    appendMessage(data.answer);
+                }
+            })
+            .catch(error => console.error("Error al cargar el mensaje inicial:", error));
+        });
+    </script>
+
+    <style>
+        .col.chat-container {
+            flex: 0 0 auto;
+            width: 800px;
+            max-width: 600px;
+        }
+        .chat-container {
+            width: 900px;
+            height: 500px;
+            border: 2px solid #2467AB;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-top: 80px;
+            margin-bottom: 50px;
+        }
+        #chatbox {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            padding-left: 0;
+            max-width: 100%;
+        }
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #ccc;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #send-btn {
+            background: #2467AB;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .message {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background: #9e3b90;
+            color: white;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background: #4267a8;
+            color: white;
+            align-self: flex-start;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+        .bot-message strong {
+            font-weight: bold;
+        }
+        .bot-message em {
+            font-style: italic;
+        }
+        .bot-message ul {
+            padding-left: 20px;
+        }
+        .user-message p {
+            margin-top: 0;
+            margin-bottom: auto;
+        }
+        .message p{
+            padding: 0;
+            margin-bottom: auto;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script src="~/js/idioma.js"></script>
+</body>

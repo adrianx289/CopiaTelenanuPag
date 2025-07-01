@@ -1,0 +1,138 @@
+@{
+    ViewData["Title"] = "Preguntas";
+}
+
+<link rel="stylesheet" href="~/css/preguntas.css">
+
+<body>
+    <br />    <br />     <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <img class="img-fluid img-traducible" 
+                src="@Url.Content("~/img/logos/titulo_pregun.png")" 
+                data-es="@Url.Content("~/img/logos/titulo_pregun.png")" 
+                data-qu="@Url.Content("~/img/logos/titulo_pregun_qu.png")"
+                style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <p class="text"
+                data-es="Aquí esperamos resolver tus interrogantes más comunes." data-qu="Kaypi suyasqaykiku aswan riqsisqa tapukuykunata chuyanchanapaq.">Aquí esperamos resolver tus interrogantes más comunes.</p><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="accordion" id="accordionExample">
+
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left titulo" type="button"
+                                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                        aria-controls="collapseOne"
+                                        data-es="¿Qué es TeleNanu?" data-qu="Imataq TeleNanuqa?">¿Qué es TeleNanu?
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="text"
+                                data-es="TeleNanu, es una plataforma virtual de teleconsejeria. Nanu es quien será tu Confidente y buscará resolver tus dudas en cuanto a salud sexual. Te invitamos a ver el video que hemos preparado para presentarte a Nanu."
+                                data-qu="TeleNanuqa salud sexual reproductivamantawan plataforma nisqa. Nanuqa kuskallam qamwan kanqa, hinaspa salud sexualmanta tapukuynikikunata maskarispa chuyanchanqa. Minkakuykim Nanuta riksichimunaypaq kay video nisqapi qawanaykipaq.">
+                                    TeleNanu, es una plataforma virtual de teleconsejeria. Nanu es quien será tu Confidente y buscará resolver tus dudas en cuanto a salud sexual. Te invitamos a ver el video que hemos preparado para presentarte a Nanu.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed titulo" type="button"
+                                        data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseTwo"
+                                        data-es="¿Qué servicios ofrece?" data-qu="Ima yachaykunatataq quwanchik?">¿Qué servicios ofrece?
+                                    
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="text"
+                                data-es="Ofrecemos un servicio online en teleconsejeria en salud sexual y reproductiva dirigido a los adolescentes y jóvenes. La información que se te brindará estará respaldada por evidencia científica."
+                                data-qu="Riksichimuwanchikmi servicio online teleconsejería nisqakuna, salud sexual y reproductivantawan qankunapaq maqta pasña wayna sipas. Willakuy maqchirimasqakunam evidencia científica nisqanwan kallpanchasqa kanqa.">
+                                    Ofrecemos un servicio online en teleconsejeria en salud sexual y reproductiva dirigido a los adolescentes y jóvenes. La información que se te brindará estará respaldada por evidencia científica.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed titulo" type="button"
+                                        data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree"
+                                        data-es="¿Es gratis?" data-qu="Mana qullqillapaq?">¿Es gratis?
+                                    
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="text"
+                                data-es="Si, este servicio de teleconsejería es totalmente gratis." data-qu="Arí, kay servicio teleconsejeríam mana qullqillapaq.">Si, este servicio de teleconsejería es totalmente gratis.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed titulo" type="button"
+                                        data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour"
+                                        data-es="¿Las consultas son confidenciales?" data-qu="Tapukuykuna qamllapaqchu?">¿Las consultas son confidenciales?
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="text"
+                                data-es="Esta plataforma es segura en cuanto a la confidencialidad. Durante la teleconsejerìa tu identidad será protegida en todo momento, te animamos a realizar tus consultas con toda libertad." 
+                                data-qu="Kay plataforma nisqa qampaqa  ancha harkasqam. Manam pipas yachanqachu pikasqaykita teleconsejería nisqa apakuptin pakasqan kanki lliw pachapi, ima tapukuynikikunatapas qispichiy munasqaykimanhina.">
+                                Esta plataforma es segura en cuanto a la confidencialidad. Durante la teleconsejerìa tu identidad será protegida en todo momento, te animamos a realizar tus consultas con toda libertad.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img src="~/img/poses/pose_05.png" class="img-fluid" style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <br><br><br>
+
+</body>
